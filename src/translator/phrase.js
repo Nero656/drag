@@ -5,7 +5,6 @@ export default function phrase({phrase, Try, attempt, id}){
     return(
         <div>
             <h1 className='text-center'>{phrase.title}</h1>
-            <span>{phrase.translate}</span>
             {
                 phrase.completed === true &&
                 <Alert  variant='success'>

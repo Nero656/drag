@@ -26,9 +26,6 @@ function App() {
         },
     ]);
 
-    let [GlobId, setId] = useState(0);
-    // let [GlobPhrase, setPhrase] = useState('');
-
     function TransSuccess(id, phrase){
         console.log(id, phrase);
         setPhrases(
@@ -43,16 +40,6 @@ function App() {
         )
     }
 
-    async function idCreate(id){
-        setId(id);
-
-        console.log(GlobId);
-    }
-
-    function phraseCreate(phrase) {
-        TransSuccess(GlobId, phrase);
-    }
-
     return (
         <Context.Provider value={{}}>
             <div className="App">
@@ -62,7 +49,7 @@ function App() {
                     <Navbar.Collapse id="basic-navbar-nav">
                     </Navbar.Collapse>
                 </Navbar>
-                <MainApp prop = {phrases} idPhrase = {idCreate} getPhrase={phraseCreate} />
+                <MainApp prop={phrases} getPhrase={TransSuccess}/>
             </div>
         </Context.Provider>
     );

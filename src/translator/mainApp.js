@@ -3,23 +3,13 @@ import Phrase from "./phrase"
 import TransForm from "./form"
 
 
-function App({prop, idPhrase, getPhrase}) {
-    // const rand = prop.phrases[Math.floor((Math.random() * prop.phrases.length))];
+function App({prop, getPhrase}) {
     let [tr, setTry] = useState(0);
     let [attempt, setAttempt] = useState(3);
-    let [itemId, setId] = useState(0)
 
-    function PhraseId(id) {
-        idPhrase(id);
-        setId(id)
-        // console.log(itemId)
-    }
-
-
-    function TransTry(phrase) {
-        getPhrase(phrase)
-        // console.log(phrase);
-        if (phrase === prop[itemId].translate) {
+    function TransTry(id, phrase) {
+        getPhrase(id, phrase)
+        if (phrase === prop[id].translate) {
             setAttempt(attempt + 1);
             setTry(tr = 1);
         }
@@ -34,7 +24,6 @@ function App({prop, idPhrase, getPhrase}) {
     return (
         <div className='indent container appForm'>
             <span>колличество попыток: {attempt}</span>
-            {/*<Phrase phrase = {rand} Try={tr} attempt = {attempt}/>*/}
             {prop.map((phrase, id) => {
                 return (
                     <div key={phrase.id}>
@@ -42,12 +31,11 @@ function App({prop, idPhrase, getPhrase}) {
                             phrase={phrase}
                             Try={tr}
                             attempt={attempt}
-                            id={itemId}
+                            id={id}
                         />
                         <TransForm
                             translate={TransTry}
                             attempt={attempt}
-                            id={PhraseId}
                             propId={phrase.id}
                             comp={phrase.completed}
                         />

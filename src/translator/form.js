@@ -1,7 +1,6 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Context from "../contex";
 
 function UserInput(){
     let [value, setValue] = useState('');
@@ -16,18 +15,14 @@ function UserInput(){
     }
 }
 
-function TransForm({propId, translate, attempt, id, comp}) {
+function TransForm({propId, translate, attempt, comp}) {
     let inp = UserInput('');
     let [btnText, setBtn] = useState('Перевести');
-    // let {phraseCreate} = useContext(Context);
-
     function submitHandler(e){
         e.preventDefault();
         if(inp.bind.value.trim()) {
             inp.clear();
-            // phraseCreate(() => inp.bind.value);
-            translate(inp.bind.value);
-            id(propId);
+            translate(propId, inp.bind.value);
         }
         if(attempt <= 1){
             setBtn('перезагрузить')
@@ -45,14 +40,14 @@ function TransForm({propId, translate, attempt, id, comp}) {
             <Form.Label>Переведите фразу</Form.Label>
                {
                    attempt !== 0 && comp !== true &&
-                    <Form.Control {...inp.bind} />
+                    <Form.Control {...inp.bind} required pattern={'[A-Za-z]'}/>
                }
                {
                     comp === true &&
                     <Form.Control  disabled={comp}/>
                }
                {
-                   attempt === 0 &&
+                   attempt === 0 && comp === false &&
                     <Form.Control disabled={true} {...inp.bind} />
                }
            </Form.Group>

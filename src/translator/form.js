@@ -40,7 +40,7 @@ function TransForm({propId, translate, attempt, comp}) {
             <Form.Label>Переведите фразу</Form.Label>
                {
                    attempt !== 0 && comp !== true &&
-                    <Form.Control {...inp.bind} required pattern={'[A-Za-z]'}/>
+                    <Form.Control {...inp.bind} required pattern="*[A-Za-z]"/>
                }
                {
                     comp === true &&
